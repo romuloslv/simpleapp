@@ -52,7 +52,7 @@ Once you are ready, you just need to run:
 It will apply your changes in sequence.
 Once everything was applied, you will get an output similar to this,
 
-![]()
+![](https://raw.githubusercontent.com/romuloslv/simpleapp/main/1mgs/img11.png)
 
 Follow this example to connect to the newly created cluster
 
