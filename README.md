@@ -18,6 +18,7 @@ _Every feature will be deployed via terraform_
 ## Requirements
 Before starting you should have the following commands installed:
 
+- [helm](https://helm.sh/docs/intro/install/#helm)
 - [terraform](https://www.terraform.io/downloads)
 - [gcloud-auth](https://cloud.google.com/blog/products/containers-kubernetes/kubectl-auth-changes-in-gke)
 - [gcloud](https://cloud.google.com/sdk/docs/install)
