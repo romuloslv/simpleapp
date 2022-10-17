@@ -2,6 +2,11 @@ locals {
   region = "southamerica-east1-a"
 }
 
+variable "bucket_name" {
+  type        = string
+  description = "Enter your Bucket name"
+}
+
 variable "kubernetes_name" {
   type        = string
   description = "Enter your GKE cluster name"
