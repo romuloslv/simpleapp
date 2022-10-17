@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.0.0"
 
   backend "gcs" {
-    bucket = "poc-from-gke-tf-state"
+    bucket = var.bucket_name
     prefix = "state"
   }
 
