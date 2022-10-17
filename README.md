@@ -31,7 +31,7 @@ First, you should export variables you are going to use
 
 Authenticate into Google Cloud console, to so run the following command:
 
-`make terraform-login project_name=poc-from-gke`
+`make terraform-login project_name=<YOUR-PROJECT-NAME>`
 
 Check your project to make sure everything goes well
 
@@ -39,18 +39,18 @@ Check your project to make sure everything goes well
 
 Now, we will continue with the creation of the cluster/pools
 
-`make terraform-apply-cluster cluster_name=k8s`
+`make terraform-apply-cluster cluster_name=<YOUR-CLUSTER-NAME>`
 
 After a few minutes, your infra is ready to be used. It will show you everything that will be created by terraform,
 take a moment to check this output. Once you are ready, you just need to run:
 
-`make terraform-apply-pkgs cluster_name=k8s project_name=poc-from-gke`
+`make terraform-apply-pkgs cluster_name=<YOUR-CLUSTER-NAME> project_name=<YOUR-PROJECT-NAME>`
 
 ### TL;DR
 
 It's possible to simplify the installation with make using the following command:
 
-`make all cluster_name=k8s project_name=poc-from-gke`
+`make all cluster_name=<YOUR-CLUSTER-NAME> project_name=<YOUR-PROJECT-NAME>`
 
 It will apply your changes in sequence.
 Once everything was applied, you will get an output similar to this,
@@ -89,6 +89,6 @@ To facilitate the understanding of the logs, the following tags were used to vie
 ## Wrapping up
 Now, to clean up everything you just need to run
 
-`make terraform-destroy cluster_name=k8s`
+`make terraform-destroy cluster_name=<YOUR-CLUSTER-NAME>`
 
 That's all folks!!!
