@@ -25,63 +25,54 @@ Before starting you should have the following commands installed:
 
 ## Let's play
 
-First, you have to authenticate into Google Cloud console, to so run the following command,
+First, you should export variables you are going to use
 
-`gcloud auth login`
+`export GOOGLE_PROJECT="<YOUR-PROJECT-NAME>" USE_GKE_GCLOUD_AUTH_PLUGIN="True" KUBE_CONFIG_PATH="~/.kube/config"`
 
-Now login with application-default
+Authenticate into Google Cloud console, to so run the following command:
 
-`gcloud auth application-default login`
+`make terraform-login project_name=poc-from-gke`
 
-Once you are logged it, you should export 3 variables you are going to use
+Check your project to make sure everything goes well
 
-`export KUBE_CONFIG_PATH=~/.kube/config USE_GKE_GCLOUD_AUTH_PLUGIN=True GOOGLE_PROJECT=<YOUR-PROJECT-NAME>`
+`make terraform-validation`
 
-Now, you can run
+Now, we will continue with the creation of the cluster/pools
 
-`terraform init && terraform validate && terraform fmt`
+`make terraform-apply-cluster cluster_name=k8s`
 
-It will load the providers and configuration. Right after that, you should run
+After a few minutes, your infra is ready to be used. It will show you everything that will be created by terraform,
+take a moment to check this output. Once you are ready, you just need to run:
 
-`terraform plan -var user="<USER-NAME>" -var kubernetes_name="<KUBERNETES-NAME>"`
+`make terraform-apply-pkgs cluster_name=k8s project_name=poc-from-gke`
 
-It will show you everything that will be created by terraform, take a moment to check this output.
-Once you are ready, you just need to run:
+### PS
 
-`terraform apply -auto-approve -var user="<USER-NAME>" -var kubernetes_name="<KUBERNETES-NAME>"`
+It's possible to simplify the installation with make using the following command:
+
+`make all cluster_name=k8s project_name=poc-from-gke`
 
 It will apply your changes in sequence.
 Once everything was applied, you will get an output similar to this,
 
 ![](https://raw.githubusercontent.com/romuloslv/simpleapp/main/1mgs/img11.png)
 
-Follow this example to connect to the newly created cluster
-
-`gcloud container clusters get-credentials <KUBERNETES-NAME> --region europe-west1 --project <YOUR-PROJECT-NAME>`
-
 Once you `port-foward` your services, you can easily access it on your browser via localhost.
 
 ```
 $ kubectl get svc -n lab-dashboard | awk '{print $4}'
-
 $ kubectl get svc -n lab-app | awk '{print $4}' | head -n2
-
-$ kubectl port-forward $(kubectl get pods -l=app.kubernetes.io/instance="monitor" -o name -n lab-monitoring) 3000 -n lab-monitoring
-
-$ kubectl port-forward $(kubectl get pods -l=app="prometheus" -o name -n lab-monitoring | tail -n1) 9090 -n lab-monitoring
-
-$ kubectl port-forward $(kubectl get pods -l=app="elasticsearch-master" -o name -n lab-logging) 9200 -n lab-logging
-
 $ kubectl port-forward $(kubectl get pods -l=app="kibana" -o name -n lab-logging) 5601 -n lab-logging
-
+$ kubectl port-forward $(kubectl get pods -l=app.kubernetes.io/instance="monitor" -o name -n lab-monitoring) 3000 -n lab-monitoring
+$ kubectl port-forward $(kubectl get pods -l=app="prometheus" -o name -n lab-monitoring | tail -n1) 9090 -n lab-monitoring
+$ kubectl port-forward $(kubectl get pods -l=app="elasticsearch-master" -o name -n lab-logging) 9200 -n lab-logging
 $ kubectl port-forward $(kubectl get pods -l=app="jaeger" -o name -n lab-observability) 16686 -n lab-observability
-
 $ kubectl port-forward $(kubectl get pods -l=app="frontend" -o name -n lab-observability) 8000 -n lab-observability
 ```
 
 ## Wrapping up
 Now, to clean up everything you just need to run
 
-`terraform destroy -auto-approve -var user="<USER-NAME>" -var kubernetes_name="<KUBERNETES-NAME>"`
+`make terraform-destroy cluster_name=k8s`
 
-That's all folks!
+That's all folks!!!

@@ -2,20 +2,9 @@ locals {
   region = "southamerica-east1-a"
 }
 
-variable "user" {
-  type        = string
-  description = "Please, enter user to binding permission"
-}
-
 variable "kubernetes_name" {
   type        = string
   description = "Enter your GKE cluster name"
-}
-
-variable "output" {
-  description = "GKE connection string"
-  type        = string
-  default     = "TO CONNECT TO KUBERNETES: gcloud container clusters get-credentials <KUBERNETES-NAME> --zone southamerica-east1-a --project poc-from-gke"
 }
 
 variable "dashboard_endpoint" {

@@ -34,9 +34,8 @@ resource "helm_release" "kubernetes_dashboard" {
   }
 
   depends_on = [
-    google_container_cluster._,
-    google_container_node_pool.node-pool,
-    kubernetes_cluster_role_binding.cluster-admin-binding
+    google_container_cluster.main,
+    google_container_node_pool.general
   ]
 }
 
@@ -55,9 +54,8 @@ resource "helm_release" "ingress-nginx" {
   ]
 
   depends_on = [
-    google_container_cluster._,
-    google_container_node_pool.node-pool,
-    kubernetes_cluster_role_binding.cluster-admin-binding
+    google_container_cluster.main,
+    google_container_node_pool.general
   ]
 }
 
@@ -96,9 +94,8 @@ resource "helm_release" "prometheus" {
   }
 
   depends_on = [
-    google_container_cluster._,
-    google_container_node_pool.node-pool,
-    kubernetes_cluster_role_binding.cluster-admin-binding
+    google_container_cluster.main,
+    google_container_node_pool.general
   ]
 }
 
@@ -141,9 +138,8 @@ resource "kubernetes_secret" "grafana" {
   }
 
   depends_on = [
-    google_container_cluster._,
-    google_container_node_pool.node-pool,
-    kubernetes_cluster_role_binding.cluster-admin-binding,
+    google_container_cluster.main,
+    google_container_node_pool.general,
     kubernetes_namespace.grafana
   ]
 }
@@ -168,9 +164,8 @@ resource "helm_release" "elasticsearch" {
   }
 
   depends_on = [
-    google_container_cluster._,
-    google_container_node_pool.node-pool,
-    kubernetes_cluster_role_binding.cluster-admin-binding
+    google_container_cluster.main,
+    google_container_node_pool.general
   ]
 }
 
@@ -185,9 +180,8 @@ resource "helm_release" "kibana" {
   timeout          = 600
 
   depends_on = [
-    google_container_cluster._,
-    google_container_node_pool.node-pool,
-    kubernetes_cluster_role_binding.cluster-admin-binding,
+    google_container_cluster.main,
+    google_container_node_pool.general,
     helm_release.prometheus,
     helm_release.elasticsearch,
     helm_release.dapr
@@ -210,9 +204,8 @@ resource "helm_release" "dapr" {
   }
 
   depends_on = [
-    google_container_cluster._,
-    google_container_node_pool.node-pool,
-    kubernetes_cluster_role_binding.cluster-admin-binding
+    google_container_cluster.main,
+    google_container_node_pool.general
   ]
 }
 
@@ -233,9 +226,8 @@ resource "helm_release" "cert-manager" {
   }
 
   depends_on = [
-    google_container_cluster._,
-    google_container_node_pool.node-pool,
-    kubernetes_cluster_role_binding.cluster-admin-binding
+    google_container_cluster.main,
+    google_container_node_pool.general
   ]
 }
 
@@ -256,9 +248,8 @@ resource "helm_release" "jaeger_operator" {
   }
 
   depends_on = [
-    google_container_cluster._,
-    google_container_node_pool.node-pool,
-    kubernetes_cluster_role_binding.cluster-admin-binding,
+    google_container_cluster.main,
+    google_container_node_pool.general,
     helm_release.cert-manager
   ]
 }
