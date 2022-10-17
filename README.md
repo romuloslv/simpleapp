@@ -46,7 +46,7 @@ take a moment to check this output. Once you are ready, you just need to run:
 
 `make terraform-apply-pkgs cluster_name=k8s project_name=poc-from-gke`
 
-### PS
+### TL;DR
 
 It's possible to simplify the installation with make using the following command:
 
@@ -69,6 +69,22 @@ $ kubectl port-forward $(kubectl get pods -l=app="elasticsearch-master" -o name 
 $ kubectl port-forward $(kubectl get pods -l=app="jaeger" -o name -n lab-observability) 16686 -n lab-observability
 $ kubectl port-forward $(kubectl get pods -l=app="frontend" -o name -n lab-observability) 8000 -n lab-observability
 ```
+
+## Grafana info
+
+```
+kubectl get secret --namespace lab-monitoring grafana -o jsonpath="{.data.admin-user}" | base64 --decode | xargs echo
+kubectl get secret --namespace lab-monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode | xargs echo
+```
+
+## Kibana filter
+
+To facilitate the understanding of the logs, the following tags were used to view the logs
+
+- kubernetes.container_name
+- kubernetes.pod_name
+- kubernetes.namespace_name
+- log
 
 ## Wrapping up
 Now, to clean up everything you just need to run
