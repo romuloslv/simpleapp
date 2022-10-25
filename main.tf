@@ -2,13 +2,8 @@ resource "google_container_cluster" "main" {
   name     = var.kubernetes_name
   location = local.region
 
-  node_pool {
-    name = "builtin"
-  }
-
-  lifecycle {
-    ignore_changes = [node_pool]
-  }
+  node_pool { name = "builtin" }
+  lifecycle { ignore_changes = [node_pool] }
 }
 
 resource "google_container_node_pool" "general" {

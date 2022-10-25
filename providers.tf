@@ -2,30 +2,16 @@ terraform {
   required_version = ">= 1.0.0"
 
   backend "gcs" {
-    bucket = var.bucket_name
+    bucket = "poc-from-gke-tf-state"
     prefix = "state"
   }
 
   required_providers {
-    google = {
-      source = "hashicorp/google"
-    }
-
-    kubernetes = {
-      source = "hashicorp/kubernetes"
-    }
-
-    helm = {
-      source = "hashicorp/helm"
-    }
-
-    kubectl = {
-      source = "gavinbunney/kubectl"
-    }
-
-    random = {
-      source = "hashicorp/random"
-    }
+    google     = { source = "hashicorp/google" }
+    kubernetes = { source = "hashicorp/kubernetes" }
+    helm       = { source = "hashicorp/helm" }
+    kubectl    = { source = "gavinbunney/kubectl" }
+    random     = { source = "hashicorp/random" }
   }
 }
 

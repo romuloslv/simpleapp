@@ -1,8 +1,6 @@
 data "kubectl_path_documents" "fluentd" {
   pattern = "./fluentdapp/*.yaml"
-  vars = {
-    docker_image = "fluent/fluentd-kubernetes-daemonset:v1.9.2-debian-elasticsearch7-1.0"
-  }
+  vars    = { docker_image = "fluent/fluentd-kubernetes-daemonset:v1.9.2-debian-elasticsearch7-1.0" }
 }
 
 resource "kubectl_manifest" "fluentd" {

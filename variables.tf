@@ -1,11 +1,4 @@
-locals {
-  region = "southamerica-east1-a"
-}
-
-variable "bucket_name" {
-  type        = string
-  description = "Enter your Bucket name"
-}
+locals { region = "southamerica-east1-a" }
 
 variable "kubernetes_name" {
   type        = string

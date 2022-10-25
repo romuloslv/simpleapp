@@ -27,7 +27,7 @@ Before starting you should have the following commands installed:
 
 First, you should export variables you are going to use 
 
-`export GOOGLE_PROJECT="<YOUR-PROJECT-NAME>" USE_GKE_GCLOUD_AUTH_PLUGIN="True" KUBE_CONFIG_PATH="~/.kube/config" TF_VAR_bucket_name="<YOUR-BUCKET-NAME>"`
+`export GOOGLE_PROJECT="<YOUR-PROJECT-NAME>" USE_GKE_GCLOUD_AUTH_PLUGIN="True" KUBE_CONFIG_PATH="~/.kube/config"`
 
 Authenticate into Google Cloud console, to so run the following command:
 

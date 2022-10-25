@@ -1,8 +1,6 @@
 data "kubectl_path_documents" "simpleapp" {
   pattern = "./simpleapp/*.yaml"
-  vars = {
-    docker_image = "romuloslv/simpleapp:1.0"
-  }
+  vars    = { docker_image = "romuloslv/simpleapp:1.0" }
 }
 
 resource "kubectl_manifest" "simpleapp" {

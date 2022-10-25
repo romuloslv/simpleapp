@@ -49,9 +49,7 @@ resource "helm_release" "ingress-nginx" {
   version          = "4.3.0"
   timeout          = 600
 
-  values = [
-    file("${path.module}/templates/ingress_nginx_values.yaml")
-  ]
+  values = [file("${path.module}/templates/ingress_nginx_values.yaml")]
 
   depends_on = [
     google_container_cluster.main,
@@ -121,9 +119,7 @@ resource "helm_release" "grafana" {
 }
 
 resource "kubernetes_namespace" "grafana" {
-  metadata {
-    name = "lab-monitoring"
-  }
+  metadata { name = "lab-monitoring" }
 }
 
 resource "kubernetes_secret" "grafana" {
@@ -144,9 +140,7 @@ resource "kubernetes_secret" "grafana" {
   ]
 }
 
-resource "random_password" "grafana" {
-  length = 24
-}
+resource "random_password" "grafana" { length = 24 }
 
 # https://www.elastic.co/elasticsearch/
 resource "helm_release" "elasticsearch" {

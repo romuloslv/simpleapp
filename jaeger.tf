@@ -30,9 +30,7 @@ resource "kubectl_manifest" "jaeger_frontend" {
 
 data "kubectl_path_documents" "jaeger_backend" {
   pattern = "./jaegerapp/backend/*.yaml"
-  vars = {
-    docker_image = "romuloslv/backend:1.0"
-  }
+  vars    = { docker_image = "romuloslv/backend:1.0" }
 }
 
 resource "kubectl_manifest" "jaeger_backend" {
